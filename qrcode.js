@@ -386,7 +386,7 @@ var QRCode;
 
 			_elImage.style.display = "none";
 			this.clear();
-			
+			function drawPattern (nLeft, nTop, nWidth, nHeight) {
 			for (var row = 0; row < nCount; row++) {
 				for (var col = 0; col < nCount; col++) {
 					var bIsDark = oQRCode.isDark(row, col);
@@ -396,6 +396,7 @@ var QRCode;
 					_oContext.lineWidth = 1;
 					_oContext.fillStyle = bIsDark ? _htOption.colorDark : _htOption.colorLight;					
 					_oContext.fillRect(nLeft, nTop, nWidth, nHeight);
+					bIsDark ? drawPattern(nLeft, nTop, nWidth, nHeight);
 					
 					// 안티 앨리어싱 방지 처리
 					_oContext.strokeRect(
@@ -413,7 +414,8 @@ var QRCode;
 					);
 				}
 			}
-			
+		} 
+			drawPattern(nLeft, nTop, nWidth, nHeight);
 			this._bIsPainted = true;
 		};
 			
