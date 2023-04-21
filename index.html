@@ -12,15 +12,12 @@
   </head>
   <body>
     <input id="text" type="text" value="exampletext" style="width: 80%" /><br />
-    <div
-      id="qrcode"
-      style="width: 100px; height: 100px; margin-top: 15px"
-    ></div>
+    <div id="qrcode" style="width: 100px; height: 100px; margin: 30px"></div>
 
     <script type="text/javascript">
       var qrcode = new QRCode(document.getElementById('qrcode'), {
-        width: 400,
-        height: 400,
+        width: 1000,
+        height: 1000,
       });
 
       function makeCode() {

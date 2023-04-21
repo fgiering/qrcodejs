@@ -381,41 +381,65 @@ var QRCode;
 			var nCount = oQRCode.getModuleCount();
 			var nWidth = _htOption.width / nCount;
 			var nHeight = _htOption.height / nCount;
-			var nRoundedWidth = Math.round(nWidth);
-			var nRoundedHeight = Math.round(nHeight);
-
+			
 			_elImage.style.display = "none";
 			this.clear();
-			function drawPattern (nLeft, nTop, nWidth, nHeight) {
 			for (var row = 0; row < nCount; row++) {
 				for (var col = 0; col < nCount; col++) {
-					var bIsDark = oQRCode.isDark(row, col);
-					var nLeft = col * nWidth;
-					var nTop = row * nHeight;
-					_oContext.strokeStyle = bIsDark ? _htOption.colorDark : _htOption.colorLight;
-					_oContext.lineWidth = 1;
-					_oContext.fillStyle = bIsDark ? _htOption.colorDark : _htOption.colorLight;					
-					_oContext.fillRect(nLeft, nTop, nWidth, nHeight);
-					bIsDark ? drawPattern(nLeft, nTop, nWidth, nHeight);
-					
-					// 안티 앨리어싱 방지 처리
-					_oContext.strokeRect(
-						Math.floor(nLeft) + 0.5,
-						Math.floor(nTop) + 0.5,
-						nRoundedWidth,
-						nRoundedHeight
-					);
-					
-					_oContext.strokeRect(
-						Math.ceil(nLeft) - 0.5,
-						Math.ceil(nTop) - 0.5,
-						nRoundedWidth,
-						nRoundedHeight
-					);
+					const drawPattern = (patternWidth, patternHeight, parentRow, parentCol) => {
+						for (var row = 0; row < nCount; row++) {
+							for (var col = 0; col < nCount; col++) {
+								var nRoundedWidth = Math.round(patternWidth);
+								var nRoundedHeight = Math.round(patternHeight);
+								var bIsDark = oQRCode.isDark(row, col);
+								var nLeft = depth > 0 ? (col * patternWidth) + parentCol : col * patternWidth;
+								var nTop = depth > 0 ? (row * patternHeight) + parentRow : row * patternHeight;
+								_oContext.strokeStyle = bIsDark ? _htOption.colorDark : _htOption.colorLight;
+								_oContext.lineWidth = 1;
+								_oContext.fillStyle = bIsDark ? _htOption.colorDark : _htOption.colorLight;
+								_oContext.fillRect(nLeft, nTop, patternWidth, patternHeight);
+								
+								// 안티 앨리어싱 방지 처리
+								_oContext.strokeRect(
+									Math.floor(nLeft) + 0.5,
+									Math.floor(nTop) + 0.5,
+									nRoundedWidth,
+									nRoundedHeight
+								);
+									
+								_oContext.strokeRect(
+									Math.ceil(nLeft) - 0.5,
+									Math.ceil(nTop) - 0.5,
+									nRoundedWidth,
+									nRoundedHeight
+								);
+							}
+						}
+					}
+						
+					let depth = 1;
+					const drawWholePattern = (wholePatternWidth, wholePatternHeight, recursionDepth) =>
+					{
+						if (depth > 0) {
+							if (recursionDepth === 0) {
+								recursionDepth = depth;
+								if (oQRCode.isDark(row, col)) {
+									drawPattern(wholePatternWidth, wholePatternHeight, row * nWidth, col * nHeight);
+								}
+								depth--;
+							}
+							else {
+								recursionDepth--;
+								drawWholePattern((wholePatternWidth/nCount), (wholePatternHeight/nCount), recursionDepth);
+							};
+						} else {
+							drawPattern(wholePatternWidth, wholePatternHeight, row, col);
+						}
+					}
+					drawWholePattern(nWidth, nHeight, depth);
 				}
-			}
-		} 
-			drawPattern(nLeft, nTop, nWidth, nHeight);
+			};
+
 			this._bIsPainted = true;
 		};
 			
