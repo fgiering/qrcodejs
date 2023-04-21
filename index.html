@@ -11,13 +11,23 @@
     <script type="text/javascript" src="qrcode.js"></script>
   </head>
   <body>
-    <input id="text" type="text" value="exampletext" style="width: 80%" /><br />
+    <label for="text">Qr-Content</label
+    ><input
+      id="text"
+      type="text"
+      value="exampletext"
+      style="width: 80%"
+    /><br />
+    <label for="width">width </label
+    ><input id="width" type="number" value="1000" style="width: 50%" />px<br />
+
     <div id="qrcode" style="width: 100px; height: 100px; margin: 30px"></div>
 
     <script type="text/javascript">
+      let width = document.getElementById('width').value;
       var qrcode = new QRCode(document.getElementById('qrcode'), {
-        width: 1000,
-        height: 1000,
+        width: width,
+        height: width,
       });
 
       function makeCode() {
