@@ -3,7 +3,7 @@
 Creates QR-Codes with QRCode.js out of Qr-Codes.
 You can use to have a long-distance effect as well as a short-distance usw of the qr-code e.g. on huge advertisings in the city.
 
-# Original Readme:
+Depth is 1 at the moment. Deeper recursion needs more power, so be carefull.
 
 # QRCode.js
 
