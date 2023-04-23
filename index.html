@@ -167,12 +167,12 @@
         elText.focus();
         return;
       }
-      showSpinner(true).then(() => {
-          qrcode.makeCode(elText.value);
-          }
-        ).then(
+      showSpinner(true).then(setTimeout(() => {
+        qrcode.makeCode(elText.value);
         showSpinner(false)
-      );
+      
+        }, 40
+      ))
       
     }
   </script>
