@@ -1,163 +1,185 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
-  <head>
-    <title>Recursive Cross-Browser QRCode generator for Javascript</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1,user-scalable=no"
-    />
-    <script type="text/javascript" src="jquery.min.js"></script>
-    <script type="text/javascript" src="qrcode.js"></script>
 
-<style>
-/* FOR LOADINGSPINNER */
+<head>
+  <title>Recursive Cross-Browser QRCode generator for Javascript</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <script type="text/javascript" src="jquery.min.js"></script>
+  <script type="text/javascript" src="qrcode.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 
-.lds-spinner {
-  color: official;
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-spinner div {
-  transform-origin: 40px 40px;
-  animation: lds-spinner 1.2s linear infinite;
-}
-.lds-spinner div:after {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 3px;
-  left: 37px;
-  width: 6px;
-  height: 18px;
-  border-radius: 20%;
-  background: #fff;
-}
-.lds-spinner div:nth-child(1) {
-  transform: rotate(0deg);
-  animation-delay: -1.1s;
-}
-.lds-spinner div:nth-child(2) {
-  transform: rotate(30deg);
-  animation-delay: -1s;
-}
-.lds-spinner div:nth-child(3) {
-  transform: rotate(60deg);
-  animation-delay: -0.9s;
-}
-.lds-spinner div:nth-child(4) {
-  transform: rotate(90deg);
-  animation-delay: -0.8s;
-}
-.lds-spinner div:nth-child(5) {
-  transform: rotate(120deg);
-  animation-delay: -0.7s;
-}
-.lds-spinner div:nth-child(6) {
-  transform: rotate(150deg);
-  animation-delay: -0.6s;
-}
-.lds-spinner div:nth-child(7) {
-  transform: rotate(180deg);
-  animation-delay: -0.5s;
-}
-.lds-spinner div:nth-child(8) {
-  transform: rotate(210deg);
-  animation-delay: -0.4s;
-}
-.lds-spinner div:nth-child(9) {
-  transform: rotate(240deg);
-  animation-delay: -0.3s;
-}
-.lds-spinner div:nth-child(10) {
-  transform: rotate(270deg);
-  animation-delay: -0.2s;
-}
-.lds-spinner div:nth-child(11) {
-  transform: rotate(300deg);
-  animation-delay: -0.1s;
-}
-.lds-spinner div:nth-child(12) {
-  transform: rotate(330deg);
-  animation-delay: 0s;
-}
-@keyframes lds-spinner {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
+  <style>
+    /* FOR LOADINGSPINNER */
 
-</style>
-
-  </head>
-  <body>
-    <h1>Recursive QR-Code Generator</h1>
-    <small>
-      <a
-        style="width: 20%"
-        href="https://github.com/fgiering/qrcodejs/tree/addRecursion"
-        >Code on GitHub</a
-      ></small
-    ><br /><br />
-    <label for="text">Qr-Content: </label
-    ><input
-      id="text"
-      type="text"
-      value="exampletext"
-      style="width: 80%"
-    /><br />
-    <label for="width">Size: </label
-    ><input id="width" type="number" value="800" style="width: 50%" />px<br />
-<button id="submit" onclick="makeCode()">Generate QR-Code</button><br />
-
-<div class="lds-spinner" display="none"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-
-    <div id="qrcode" style="width: 100px; height: 100px; margin: 30px"></div>
-
-    <script type="text/javascript">
-
-
-
-function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
+    .lds-spinner {
+      color: official;
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
     }
-}
 
-      function makeCode() {
-        var elText = document.getElementById('text');
-let width = document.getElementById('width').value;
-let qrNode = document.getElementById('qrcode');
-removeAllChildNodes(qrNode);
+    .lds-spinner div {
+      transform-origin: 40px 40px;
+      animation: lds-spinner 1.2s linear infinite;
+    }
+
+    .lds-spinner div:after {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 3px;
+      left: 37px;
+      width: 6px;
+      height: 18px;
+      border-radius: 20%;
+      background: #fff;
+    }
+
+    .lds-spinner div:nth-child(1) {
+      transform: rotate(0deg);
+      animation-delay: -1.1s;
+    }
+
+    .lds-spinner div:nth-child(2) {
+      transform: rotate(30deg);
+      animation-delay: -1s;
+    }
+
+    .lds-spinner div:nth-child(3) {
+      transform: rotate(60deg);
+      animation-delay: -0.9s;
+    }
+
+    .lds-spinner div:nth-child(4) {
+      transform: rotate(90deg);
+      animation-delay: -0.8s;
+    }
+
+    .lds-spinner div:nth-child(5) {
+      transform: rotate(120deg);
+      animation-delay: -0.7s;
+    }
+
+    .lds-spinner div:nth-child(6) {
+      transform: rotate(150deg);
+      animation-delay: -0.6s;
+    }
+
+    .lds-spinner div:nth-child(7) {
+      transform: rotate(180deg);
+      animation-delay: -0.5s;
+    }
+
+    .lds-spinner div:nth-child(8) {
+      transform: rotate(210deg);
+      animation-delay: -0.4s;
+    }
+
+    .lds-spinner div:nth-child(9) {
+      transform: rotate(240deg);
+      animation-delay: -0.3s;
+    }
+
+    .lds-spinner div:nth-child(10) {
+      transform: rotate(270deg);
+      animation-delay: -0.2s;
+    }
+
+    .lds-spinner div:nth-child(11) {
+      transform: rotate(300deg);
+      animation-delay: -0.1s;
+    }
+
+    .lds-spinner div:nth-child(12) {
+      transform: rotate(330deg);
+      animation-delay: 0s;
+    }
+
+    @keyframes lds-spinner {
+      0% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>Recursive QR-Code Generator</h1>
+  <small>
+    <a style="width: 20%" href="https://github.com/fgiering/qrcodejs/tree/addRecursion">Code on
+      GitHub</a></small><br /><br />
+  <label for="text">Qr-Content: </label><input id="text" type="text" value="exampletext" style="width: 80%" /><br />
+  <label for="width">Size: </label><input id="width" type="number" value="800" style="width: 50%" />px<br />
+  <button id="submit" onclick="makeCode()">Generate QR-Code</button><br />
+
+  <div id="lds-spinner" class="lds-spinner" style="display: none;">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <div id="qrcode" style="width: 100px; height: 100px; margin: 30px"></div>
+
+  <script type="text/javascript">
+
+
+
+    function removeAllChildNodes(parent) {
+      while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+      }
+    }
+
+    function makeCode() {
+      let spinner = document.getElementById('lds-spinner');
+      spinnder.style.display = "block";
+      var elText = document.getElementById('text');
+      let width = document.getElementById('width').value;
+      let qrNode = document.getElementById('qrcode');
+      removeAllChildNodes(qrNode);
       var qrcode = new QRCode(qrNode, {
         width: width,
         height: width,
-      }); 
-        
+      });
 
-        if (!elText.value) {
-          alert('Input a text');
-          elText.focus();
-          return;
-        }
 
-        qrcode.makeCode(elText.value);
+      if (!elText.value) {
+        alert('Input a text');
+        elText.focus();
+        return;
       }
 
-      $('#text')
-        .on('blur', function () {
+      qrcode.makeCode(elText.value);
+      spinnder.style.display = "none";
+    }
+
+    $('#text')
+      .on('blur', function () {
+        makeCode();
+      })
+      .on('keydown', function (e) {
+        if (e.keyCode == 13) {
           makeCode();
-        })
-        .on('keydown', function (e) {
-          if (e.keyCode == 13) {
-            makeCode();
-          }
-        });
-    </script>
-  </body>
+        }
+      });
+  </script>
+</body>
+
 </html>
