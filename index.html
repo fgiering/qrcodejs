@@ -28,7 +28,7 @@
     /><br />
     <label for="width">Size: </label
     ><input id="width" type="number" value="1000" style="width: 50%" />px<br />
-
+<button id="submit" onclick="makeCode()">Generate QR-Code</button><br />
     <div id="qrcode" style="width: 100px; height: 100px; margin: 30px"></div>
 
     <script type="text/javascript">
@@ -51,8 +51,6 @@
 
         qrcode.makeCode(elText.value);
       }
-
-      makeCode();
 
       $('#text')
         .on('blur', function () {
