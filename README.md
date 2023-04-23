@@ -5,6 +5,12 @@ You can use to have a long-distance effect as well as a short-distance usw of th
 
 Depth is 1 at the moment. Deeper recursion needs more power, so be carefull.
 
+## ToDos:
+- remove jquery
+- update to ES6 
+- reactor code
+
+
 # QRCode.js
 
 QRCode.js is javascript library for making QRCode. QRCode.js supports Cross-browser with HTML5 Canvas and table tag in DOM.
