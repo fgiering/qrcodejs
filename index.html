@@ -33,10 +33,20 @@
 
     <script type="text/javascript">
 
+
+
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
       function makeCode() {
         var elText = document.getElementById('text');
 let width = document.getElementById('width').value;
-      var qrcode = new QRCode(document.getElementById('qrcode'), {
+let qrNode = document.getElementById('qrcode');
+removeAllChildNodes(qrNode);
+      var qrcode = new QRCode(qrNode, {
         width: width,
         height: width,
       }); 
