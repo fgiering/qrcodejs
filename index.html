@@ -32,16 +32,15 @@
     <div id="qrcode" style="width: 100px; height: 100px; margin: 30px"></div>
 
     <script type="text/javascript">
-      let width = document.getElementById('width').value;
-      var qrcode = new QRCode(document.getElementById('qrcode'), {
-        width: width,
-        height: width,
-      });
 
       function makeCode() {
         var elText = document.getElementById('text');
-        qrcode.width = document.getElementById('width').value;
-        qrcode.height = document.getElementById('width').value;
+let width = document.getElementById('width').value;
+      var qrcode = new QRCode(document.getElementById('qrcode'), {
+        width: width,
+        height: width,
+      }); 
+        
 
         if (!elText.value) {
           alert('Input a text');
