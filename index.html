@@ -149,7 +149,7 @@
 
     function makeCode() {
       let spinner = document.getElementById('lds-spinner');
-      spinnder.style.display = "block";
+      spinner.style.display = "block";
       var elText = document.getElementById('text');
       let width = document.getElementById('width').value;
       let qrNode = document.getElementById('qrcode');
@@ -167,7 +167,7 @@
       }
 
       qrcode.makeCode(elText.value);
-      spinnder.style.display = "none";
+      spinner.style.display = "none";
     }
 
     $('#text')
