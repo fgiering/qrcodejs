@@ -119,6 +119,7 @@
   <label for="text">Qr-Content: </label><input id="text" type="text" value="exampletext" style="width: 80%" /><br />
   <label for="width">Size: </label><input id="width" type="number" value="800" style="width: 50%" /><br />
   <button id="submit" onclick="makeCode()">Generate QR-Code</button><br />
+  <button id="download" onclick="saveCanvas()">Download QR-Code</button><br />
 
   <div id="lds-spinner" class="lds-spinner" style="display: none;">
     <div></div>
@@ -138,9 +139,6 @@
   <div id="qrcode" style="width: 100%; height: 100%; padding: 30px; background-color: #fff;"></div>
 
   <script type="text/javascript">
-
-
-
     function removeAllChildNodes(parent) {
       while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
@@ -151,6 +149,17 @@
       let spinner = document.getElementById('lds-spinner');
       value == true ? spinner.style.display = "block" : spinner.style.display = "none";
     }
+
+    function saveCanvas() {
+        let qrNode = document.getElementById('qrcode');
+        if (qrNode.firstChild) {
+          const link = document.createElement('a');
+          link.download = 'download.png';
+          link.href = qrNode.firstChild.toDataURL();
+          link.click();
+          link.delete;
+        }
+      }
 
     function makeCode() {
       var elText = document.getElementById('text');
