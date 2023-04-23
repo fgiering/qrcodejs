@@ -40,6 +40,8 @@
 
       function makeCode() {
         var elText = document.getElementById('text');
+        qrcode.width = document.getElementById('width').value;
+        qrcode.height = document.getElementById('width').value;
 
         if (!elText.value) {
           alert('Input a text');
